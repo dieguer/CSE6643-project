@@ -31,7 +31,6 @@ function [W,H]=clustering(X,S,k,maxitr,alpha,beta)
     beta2=sqrt(beta);
     
     for i=1:maxitr
-        i
         % equation (9) from paper
         [ wt,Y,iter,success ] = nnlsm_blockpivot(H',X');
         %[ wt,Y,iter,success ] = nnlsm_activeset(H',X');
