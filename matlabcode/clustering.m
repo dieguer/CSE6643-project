@@ -32,6 +32,7 @@ function [W,H]=clustering(X,S,k,maxitr,alpha,beta)
     
     for i=1:maxitr
         % equation (9) from paper
+        %[wt,iter]= solveNormalEqComb(H',X');
         [ wt,Y,iter,success ] = nnlsm_blockpivot(H',X');
         %[ wt,Y,iter,success ] = nnlsm_activeset(H',X');
         W=wt';
@@ -39,12 +40,14 @@ function [W,H]=clustering(X,S,k,maxitr,alpha,beta)
         % equation (10) from paper
         m1=[alpha2*H';beta2*Ik];
         m2=[alpha2*S;beta2*H];
+        %[Hhat,iter]=solveNormalEqComb(m1,m2);
         [ Hhat,Y,iter,success ] = nnlsm_blockpivot(m1,m2);
         %[ Hhat,Y,iter,success ] = nnlsm_activeset(m1,m2);
         
         % equation (11) from paper
         m1=[W;alpha2*Hhat';beta2*Ik];
         m2=[X;alpha2*S;beta2*Hhat];
+        %[H,iter]=solveNormalEqComb(m1,m2);
         [ H,Y,iter,success ] = nnlsm_blockpivot(m1,m2);
         %[ H,Y,iter,success ] = nnlsm_activeset(m1,m2);
     end
