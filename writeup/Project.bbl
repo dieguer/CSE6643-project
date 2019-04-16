@@ -1,53 +1,41 @@
-\begin{thebibliography}{7}
-\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
-\expandafter\ifx\csname url\endcsname\relax
-  \def\url#1{\texttt{#1}}\fi
-\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\begin{thebibliography}{1}
 
-\bibitem[{201(2018)}]{2018CCod}
- 2018.
-\newblock Codinmf: Co-clustering of directed graphs via nmf.
-\newblock \emph{32nd AAAI Conference on Artificial Intelligence, AAAI 2018} :
-  3611--3618.
+\bibitem{2018CCod}
+Codinmf: Co-clustering of directed graphs via nmf.
+\newblock {\em 32nd AAAI Conference on Artificial Intelligence, AAAI 2018},
+  pages 3611--3618, 2018.
 
-\bibitem[{Acemoglu et~al.(2015)Acemoglu, Ozdaglar and
-  Tahbaz-Salehi}]{acemoglu2015}
-Acemoglu D, Ozdaglar A, Tahbaz-Salehi A. 2015.
+\bibitem{acemoglu2015}
+D.~Acemoglu, A.~Ozdaglar, and A.~Tahbaz-Salehi.
 \newblock Systemic risk and stability in financial networks.
-\newblock \emph{The American Economic Review} \textbf{105}: 564--608.
-\newblock ISSN 00028282.
-\newline\urlprefix\url{http://www.jstor.org/stable/43495393}
+\newblock {\em The American Economic Review}, 105(2):564--608, 2015.
 
-\bibitem[{Du et~al.(2017{\natexlab{a}})Du, Drake and Park}]{Du2017b}
-Du R, Drake B, Park H. 2017{\natexlab{a}}.
+\bibitem{Du2017b}
+R.~Du, B.~Drake, and H.~Park.
 \newblock Hybrid clustering based on content and connection structure using
   joint nonnegative matrix factorization.
-\newblock \emph{Journal of global optimization} : 1--17ISSN 0925-5001.
+\newblock {\em Journal of global optimization}, pages 1--17, 2017.
 
-\bibitem[{Du et~al.(2017{\natexlab{b}})Du, Kuang, Drake and Park}]{Du2017}
-Du R, Kuang D, Drake B, Park H. 2017{\natexlab{b}}.
+\bibitem{Du2017}
+R.~Du, D.~Kuang, B.~Drake, and H.~Park.
 \newblock Hierarchical community detection via rank-2 symmetric nonnegative
   matrix factorization.
-\newblock \emph{Computational Social Networks} \textbf{4}: 7.
-\newblock ISSN 2197-4314.
-\newline\urlprefix\url{https://doi.org/10.1186/s40649-017-0043-5}
+\newblock {\em Computational Social Networks}, 4(1):7, Sep 2017.
 
-\bibitem[{Gai and Kapadia(2010)}]{Gai2010}
-Gai P, Kapadia S. 2010.
+\bibitem{Gai2010}
+P.~Gai and S.~Kapadia.
 \newblock Contagion in financial networks.
-\newblock \emph{Proceedings: Mathematical, Physical and Engineering Sciences}
-  \textbf{466}: 2401--2423.
-\newblock ISSN 13645021.
-\newline\urlprefix\url{http://www.jstor.org/stable/25706352}
+\newblock {\em Proceedings: Mathematical, Physical and Engineering Sciences},
+  466(2120):2401--2423, 2010.
 
-\bibitem[{Jackson(2008)}]{Jackson2008a}
-Jackson MO. 2008.
-\newblock \emph{{Social and economic networks}}.
-\newblock ISBN 9780691134406.
+\bibitem{Jackson2008a}
+M.~O. Jackson.
+\newblock {\em {Social and economic networks}}.
+\newblock 2008.
 
-\bibitem[{Jackson and Evan(2019)}]{Jackson2019}
-Jackson MO, Evan S. 2019.
+\bibitem{Jackson2019}
+M.~O. Jackson and S.~Evan.
 \newblock {Behavioral Communities and the Atomic Structure of Networks}.
-\newblock \emph{SSRN} .
+\newblock {\em SSRN}, 2019.
 
 \end{thebibliography}

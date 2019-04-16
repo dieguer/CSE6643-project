@@ -150,8 +150,99 @@ Note that each subproblem is a nonnegative least squares (NLS). The procedure is
 %	\end{minipage}
 %\end{figure}
 
-\bibliographystyle{jae}
+
+
+\section{Algorithm Description}
+include
+\section{Results}
+
+As previously stated we have developed a two stage strategy to use the algorithm. In first place we simulate data from randomly generated matrices to ressemble perfectly clustered data. This allows us to test the performance of the clustering method to detect communities. In second place we use the real data obtained describing the paths followed by notes issued by the Bank of Canada. This paths span a network where the vertices are the financial institutions in each region of Canada.
+
+\subsection{Test  Data}
+
+In order to test the data we had to come up with a minimal working example that the algorith would always be able to replicate. In the case this particular  community detection algorithm we reversed engineered the process of decomposition. 
+
+First, notice that the number of rows of the matrix $H$, is the number of possible clusters where every vertex can be assigned. From a hard clustering perspective, a vertex belongs to the community, i.e. row, where it shows the largest value. In other words the $i$-th observation will belong to the cluster $j$-th if the $H_{ij}\geq H_{ij'}$, for all $j'$. 
+
+Therefore, the minimal working example can be built by simulating a matrix $H$ that presents perfect clustering. In other words, that each column of  $H$ is full of zeroes with the exception of the row that shows the membership of the vertex to a particular cluster. The structure of $W$ is not particularly important for the simulation as long as the matrix is somewhat dense. 
+
+Based on the simulated matrix $\widetilde{H}$ we can build the matrices $X=\widetilde{W}\widetilde{H}$ and  $S=\widetilde{H}^T\widetilde{H}$. These matrices can be fed to the algorithm to test how the algorithm performs under known perfect clustering. For this example the simulated network $X$ has dimensions $n=500$ and $m=10.000$. This achieved by simulating a $\widetilde{H}$ matrix with $k$ rows and $500$ columns.  For this simulation we have choose $k=6$ for the sake of ilustration. However, the choice of $k$ under this simulation framework is not relevant as long as we work under the assumption that the number communities is known. 
+
+
+
+\begin{figure}[!h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{../project/CSE6643-project/original_6.png}
+    \label{fig:fig1}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{../project/CSE6643-project/estimated.png}
+    \label{fig:fig2}
+    \end{subfigure}
+    \caption{\protect\subref{fig:fig1}, The left panel  shows the clustering structure of the simulated data. On the  right panel, \protect\subref{fig:fig2} we observe the number of vertices by cluster estimated by the algorithm}
+\end{figure}
+
+The results obtained by the simulation showed two consistent behaviors. First, the number of clusters is replicated precisely when the correct $k$ is provided to the algorithm. While the labelling of the cluster might change neither the number of clusters, nor the cluster memebership change from the simulated data to the estimated by the algorithm. In other words, this estimation is equivalent up to relabelling of clusters. This becomes evident when observing Figure 1. Each one of the columns in the graph represent the number of vertices that are included in each one of the six clusters. Is evident from the comparisson of panels that each column in the graph on the left panel can be matched, in absolute value, to a column on the right panel, however the label of the cluster changes.
+
+The second thing that was clear from this simulation is the sensitivity of the $k$ parameter under this case can really affect the structure of the communities identified. In this particular case, a deviation to a value of $k=8$ caused the  algorithm to become unstable. A choice of $k=5$ changed fundamentally the structure of the clusters. In general with other simulations is clear that the algorithm can be fairly unstable when deviating from the true $k$. 
+
+
+
+\begin{figure}[!h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{../project/CSE6643-project/original_6.png}
+    \label{fig:fig1}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{../project/CSE6643-project/kmis.png}
+    \label{fig:fig2}
+    \end{subfigure}
+    \caption{\protect\subref{fig:fig1}, The left panel  shows the clustering structure of the simulated data. On the  right panel, \protect\subref{fig:fig2} we observe the number of vertices by cluster estimated by the algorithm when the parameter $k=5$}
+\end{figure}
+
+Is important to notice, that the conclusions drawn using the extreme, hard clustering, scenario also hold under a more relaxed structure of $H$\footnote{Several such simulations have been run by the authors, these can be found in the appended code}.
+
+
+\subsection{Results: A network of money}
+
+
+Given the good performance of the algorithm under ideal conditions, the logical next step is to implement the network data. The size of the original data set made it impossible to process such data under MATLAB, hence the preparation of the original matrices had to be done with both Python and Postgresql. 
+
+\begin{figure}[!h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{../project/CSE6643-project/FIG1.png}
+    \label{fig:fig1}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{../project/CSE6643-project/FIG2.png}
+    \label{fig:fig2}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{../project/CSE6643-project/FIG3.png}
+    \label{fig:fig3}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{../project/CSE6643-project/FIG4.png}
+    \label{fig:fig4}
+    \end{subfigure}
+    \caption{\protect\subref{fig:fig1}, The left upper panel shows the clustering structure of the simulated data under $k=10$. The left upper panel shows the clustering structure of the simulated data under $k=15$. The left upper panel shows the clustering structure of the simulated data under $k=20$. The left upper panel shows the clustering structure of the simulated data under $k=30$.}
+\end{figure}
+
+The results are certainly astonishing. For the sake of transaprency, we run the algorithm for the real data, constructed as described in section 2, for several choices of rank $k$. We observed that for $10> k\geq1$   the number of clusters is equal to one. Despite the the algorithm succesfully assigning every vertex to a cluster. The number of clusters increases gradually as the choice of $k$ increases, however, there is no $k<50$ for which the number of clusters fully matches the number of rows of $H$. This happens despite the fact that for every clustering structure all of the cluster are assigned unambiguously to one of the clusters. Meaning, the load of $H_{ij}$ for the particular cluster of the $i$-th observation is considerably higher to the loads of other clusters. This result is also persistent despite the number of iterations that we allow the algorithm to run.
+
+This opens the question of how is that this results comes to be and wether such clustering is an appropriate description of how communities form in such a network. From this we can tell that while the algorithm is successful in approximating the equations described in the problem statement, there is probably a numeric explanation to why is that the number of clusters end up not being the same as the rank specified for the rank reduced decomposition. Further inquiry in this matter is recommended. 
+
+\bibliographystyle{abbrv}
 \bibliography{refrences}\clearpage
-
-
 \end{document}
