@@ -28,14 +28,16 @@ P.~Gai and S.~Kapadia.
 \newblock {\em Proceedings: Mathematical, Physical and Engineering Sciences},
   466(2120):2401--2423, 2010.
 
-\bibitem{Jackson2008a}
-M.~O. Jackson.
-\newblock {\em {Social and economic networks}}.
-\newblock 2008.
-
 \bibitem{Jackson2019}
 M.~O. Jackson and S.~Evan.
 \newblock {Behavioral Communities and the Atomic Structure of Networks}.
 \newblock {\em SSRN}, 2019.
+
+\bibitem{kim2008}
+J.~{Kim} and H.~{Park}.
+\newblock Toward faster nonnegative matrix factorization: A new algorithm and
+  comparisons.
+\newblock In {\em 2008 Eighth IEEE International Conference on Data Mining},
+  pages 353--362, Dec 2008.
 
 \end{thebibliography}
