@@ -4,9 +4,9 @@ clear
 %The minimization probles are given by: min||X-WH|| and min||S-H^tH|| where W is (mxk) and H is (kxn)
 
 %We need to decide sample size n, features m, and clusters k
-n=50;
-m=2200;
-k=3;
+n=500;
+m=10000;
+k=6;
 
 %One approach is to just create random matrices W and H such that X=WH and S=H^tH
 rng(106,'twister');
@@ -68,6 +68,13 @@ hold on
 plot(Rb,Rh)
 hold off
 
+
+hist(clustmem(H))
+hist(clustmem(Hp))
+
+
+%% 
+
 %Clustered matrix
 Rwc=zeros(fv/inc,1);
 Rhc=Rwc;
@@ -87,13 +94,46 @@ hold on
 plot(Rb,Rhc)
 hold off
 
-%Starting from any random matrix
-Xr=rand(m,n);
-S=rand(n,n);
-Sr=S*S;
+
+hist(clustmem(Htp))
+hist(clustmem(Ht))
+
+%% 
 
 
-alphar=norm(Xr,'fro')^2/norm(Sr,'fro')^2;
-betar=alphar*max(max(Sr));
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%       Real Data
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-[Wr,Hr]=clustering(X,S,k,100,alphar,betar);
+S_real=dlmread("S_matrix.csv");
+X_real=dlmread("X_matrix.csv");
+X_real=X_real.'
+alpha_r=norm(X_real,'fro')^2/norm(S_real,'fro')^2;
+beta_r=alpha_r*max(max(S_real));
+
+k=20;
+[W_real,H_real]=clustering(X_real,S_real,k,200,alpha_r,beta_r);
+
+clustmem(H_real)
+
+ceros=find(sum(S_real,2)~=0)
+
+S_R=S_real(ceros,ceros)
+
+X_R=X_real(:,ceros)
+
+alpha_R=norm(X_R,'fro')^2/norm(S_R,'fro')^2;
+beta_R=alpha_R*max(max(S_R));
+
+k=40
+
+kas=[ 10 15 20 30 ]
+
+for i=1:4
+[W_R,H_R]=clustering(X_R,S_R,kas(i),500,alpha_R,beta_R);
+gfc=figure
+hist(clustmem(H_R))
+hold on
+saveas(gcf,sprintf('/home/diegolog/Documents/CSE 6643/project/CSE6643-project/FIG%d.png',i))
+end
+
